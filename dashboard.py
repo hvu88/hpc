@@ -19,7 +19,7 @@ Este dashboard permite visualizar el comportamiento del algoritmo ante diferente
 y evalúa simultáneamente la escalabilidad Fuerte y Débil.
 """)
 
-st.info(f"🖥️ **Recursos Detectados:** El contenedor tiene acceso a **{multiprocessing.cpu_count()}** núcleos de CPU reales.")
+st.info(f"🖥️ **Recursos Detectados:** El contenedor tiene acceso a **{multiprocessing.cpu_count()}** núcleos de CPU, sin embargo su desempeño puede verse limitado.")
 
 # --- Inicialización de Estado ---
 if 'df_final' not in st.session_state:
