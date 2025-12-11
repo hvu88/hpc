@@ -18,19 +18,16 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /workspace
 
 # Instalamos dependencias de Python
-# Usamos --no-cache-dir para mantener la imagen ligera
 RUN pip3 install --no-cache-dir streamlit matplotlib numpy plotly pandas
 
-# --- PASO CRÍTICO DE COPIA ---
-# Copiamos TODOS los archivos del repositorio al contenedor
+# Copiamos TODO
 COPY . .
 
-# 🛠️ DIAGNÓSTICO: Esto imprimirá en los logs de Render qué archivos se copiaron.
-# Si falla, podrás ver en el log si dashboard.py está ahí o dentro de una carpeta.
-RUN ls -la /workspace
+# 🕵️‍♂️ DEBUG: Listar archivos para ver si Makefile llegó
+RUN echo "--- CONTENIDO DE LA CARPETA RAIZ ---" && ls -la
+RUN echo "--- CONTENIDO DE LA CARPETA SRC ---" && ls -la src/
 
-# --- PASO CRÍTICO DE COMPILACIÓN ---
-# ⚠️ IMPORTANTE: Descomentamos esta línea. Es OBLIGATORIA para crear el ejecutable C.
+# Compilar
 RUN make
 
 # Exponer el puerto
