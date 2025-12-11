@@ -6,7 +6,9 @@ TARGET = simulacion_app
 
 SRCS = src/main.c src/simulacion.c
 
-all:
+all: $(TARGET)
+
+$(TARGET): $(SRCS)
 	$(CC) $(CFLAGS) -o $(TARGET) $(SRCS) $(LDFLAGS)
 
 clean:
