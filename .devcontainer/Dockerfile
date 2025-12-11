@@ -23,10 +23,6 @@ RUN pip3 install --no-cache-dir streamlit matplotlib numpy plotly pandas
 # Copiamos TODO
 COPY . .
 
-# 🕵️‍♂️ DEBUG: Listar archivos para ver si Makefile llegó
-RUN echo "--- CONTENIDO DE LA CARPETA RAIZ ---" && ls -la
-RUN echo "--- CONTENIDO DE LA CARPETA SRC ---" && ls -la src/
-
 # Compilar
 RUN make
 
