@@ -31,11 +31,8 @@ COPY . .
 # El 'if' evita que falle si por alguna razón no hay Makefile.
 RUN if [ -f Makefile ]; then make; fi
 
-# Documentamos el puerto (Render ignora esto, pero es buena práctica)
-EXPOSE 8501
+# Koyeb inyectará la variable PORT (por defecto 8000)
+EXPOSE 8000
 
-# 🌟 COMANDO DE INICIO PARA RENDER 🌟
-# Render inyecta una variable de entorno llamada PORT.
-# Usamos 'sh -c' para que Streamlit lea esa variable dinámica.
-# Si PORT no está definido (ej. en local), usa el 8501 por defecto.
-CMD sh -c "streamlit run dashboard.py --server.port=${PORT:-8501} --server.address=0.0.0.0"
+# Usamos sh -c para capturar la variable de entorno
+CMD sh -c "streamlit run dashboard.py --server.port=${PORT:-8000} --server.address=0.0.0.0"
