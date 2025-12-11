@@ -52,7 +52,7 @@ else:
     HEAT_SOURCE_ID = 2
 
 # 3. ITERACIONES Y PROCESADORES
-steps = st.sidebar.number_input("Iteraciones de Tiempo", min_value=1000, max_value=1000000, value=20000, step=5000)
+steps = st.sidebar.number_input("Iteraciones de Tiempo", min_value=1, max_value=1000000, value=20000, step=5000)
 max_procs = st.sidebar.slider("Máximo de Procesos", min_value=1, max_value=4, value=4)
 
 # Parseo de inputs
@@ -86,7 +86,16 @@ def run_simulation(n, p, steps, heat_id):
         return 0.0, False
 
 # === BOTÓN DE EJECUCIÓN ===
-if st.sidebar.button("🚀 Ejecutar Análisis"):
+
+# 1. Definimos la condición
+bloquear_boton = steps < 1000
+
+# 2. Opcional: Mostrar advertencia visual
+if bloquear_boton:
+    st.sidebar.error("⚠️ Se requieren mínimo 1000 iteraciones.")
+
+# 3. Botón con el parámetro 'disabled'
+if st.sidebar.button("🚀 Ejecutar Análisis", disabled=bloquear_boton):
     
     # Limpieza inicial
     if os.path.exists(FILENAME_BENCHMARK): os.remove(FILENAME_BENCHMARK)
