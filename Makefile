@@ -1,14 +1,12 @@
 CC = mpicc
 # AQUI AGREGAMOS -O3 (Optimización máxima) y -lm (Librería matemática)
-CFLAGS = -Wall -O3
+CFLAGS = -Wall -O3 -Iinclude
 LDFLAGS = -lm 
 TARGET = simulacion_app
 
-SRCS = main.c simulacion.c
+SRCS = src/main.c src/simulacion.c
 
-all: $(TARGET)
-
-$(TARGET): $(SRCS)
+all:
 	$(CC) $(CFLAGS) -o $(TARGET) $(SRCS) $(LDFLAGS)
 
 clean:
