@@ -8,6 +8,7 @@ import os
 import time
 import shutil
 import tempfile
+import multiprocessing
 
 # --- Configuración de la Página ---
 st.set_page_config(page_title="Escalabidad - HPC", layout="wide")
@@ -17,6 +18,8 @@ st.markdown("""
 Este dashboard permite visualizar el comportamiento del algoritmo ante diferentes cargas de trabajo ($N$) 
 y evalúa simultáneamente la escalabilidad Fuerte y Débil.
 """)
+
+st.info(f"🖥️ **Recursos Detectados:** El contenedor tiene acceso a **{multiprocessing.cpu_count()}** núcleos de CPU reales.")
 
 # --- Inicialización de Estado ---
 if 'df_final' not in st.session_state:
