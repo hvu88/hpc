@@ -26,6 +26,9 @@ RUN pip3 install --no-cache-dir streamlit matplotlib numpy plotly
 # Copiamos todo el contenido de tu repositorio al contenedor
 COPY . .
 
+# 🛑 DIAGNÓSTICO: Esto imprimirá en el log de Render qué archivos se copiaron
+RUN ls -la /app
+
 # 🌟 COMPILACIÓN MPI 🌟
 # Si tienes un Makefile, esto compilará tu código C automáticamente.
 # El 'if' evita que falle si por alguna razón no hay Makefile.
@@ -34,8 +37,5 @@ RUN if [ -f Makefile ]; then make; fi
 # Documentamos el puerto (Render ignora esto, pero es buena práctica)
 EXPOSE 8501
 
-# 🌟 COMANDO DE INICIO PARA RENDER 🌟
-# Render inyecta una variable de entorno llamada PORT.
-# Usamos 'sh -c' para que Streamlit lea esa variable dinámica.
-# Si PORT no está definido (ej. en local), usa el 8501 por defecto.
-CMD sh -c "streamlit run dashboard.py --server.port=${PORT:-8501} --server.address=0.0.0.0"
+# Usamos la ruta absoluta /app/dashboard.py
+CMD sh -c "streamlit run /app/dashboard.py --server.port=${PORT:-8501} --server.address=0.0.0.0"
